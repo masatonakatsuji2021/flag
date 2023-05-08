@@ -1,0 +1,8 @@
+{
+    "name":"@flag/flag",
+    "version":"1,0,0",
+    "scripts":{
+        "postinstall":"node ./bin/install.js", 
+        "postuninstall":"node ./bin/uninstall.js"
+    }
+}
