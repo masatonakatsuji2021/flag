@@ -2,12 +2,14 @@
     "name":"@flag/flag",
     "description":"A web framework for the client side that can deploy spa (single-page-action) simply and quickly. Central console application.",
     "author": "masato nakatsuji",
+    "license": "MIT",
     "version":"1.0.0",
     "dependencies": {
         "@flag/cli":"^1.0.0",
         "@flag/build":"^1.0.0",
         "@flag/front":"^1.0.0",
-        "@flag/validate":"^1.0.0"
+        "@flag/validate":"^1.0.0",
+        "@flag/server":"^1.0.0"
     },
     "scripts":{
         "postinstall":"node ./bin/install.js", 
