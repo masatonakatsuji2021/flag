@@ -9,6 +9,11 @@ if(mainCommand == "front"){
     process.argv = args;
     require("@flag/front/cli.js");
 }
+else if(mainCommand == "server"){
+    args.shift();
+    process.argv = args;
+    require("@flag/server/cli.js");
+}
 else{
     cli.red("[ERROR]").outn("\"" + mainCommand + "\" is not exists command.");
 }
