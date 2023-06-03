@@ -6,7 +6,7 @@
     "version":"1.0.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/masatonakatsuji2021/flag"
+        "url": "git://github.com/masatonakatsuji2021/flag"
     },
     "dependencies": {
         "@flag/cli":"^1.0.0",
