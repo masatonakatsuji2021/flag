@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../style.css">
+<title>Flag - Web Frontend Framework</title>
+</head>
+<body>
+
+    <header>
+        <h1><a href="../">FLAG</a></h1>
+        <a href="https://github.com/masatonakatsuji2021/flag">GitHub</a>
+        <a href="../install/">installation</a>
+    </header>
+
+    <div class="contents">
+
+        <div class="ttl">
+            <h1>Simple Tutorial</h1>
+        </div>
+
+        <p>Here is a tutorial to create a sample for displaying a simple "Hello World!" screen.</p>
+
+        <div class="linklist">
+            <p><a href="#create">Create Project</a></p>
+            <p><a href="#structure">Project Directory Structure</a></p>
+            <p><a href="#routing">Page Routing</a></p>
+            <p><a href="#controller">Controller Extend Class</a></p>
+            <p><a href="#rendering">Rendering Contents (HTML)</a></p>
+        </div>
+
+        <p>It will start when the following steps are completed</p>
+
+        <ul>
+            <li>・Node.js(npm) Installed</li>
+            <li>・Flag installed</li>
+        </ul>
+
+        <p>If you have not finished installing Flag, please install it with the following npm command.</p>
+
+        <pre><code>npm i -g @flagfw/flag</code></pre>
+
+        <hr>
+
+        <a id="create"></a>
+        <h2>- Create Project</h2>
+
+        <p>Select any current directory and run the following command from the console:<br>
+        After that, input in various interactive formats continues.</p>
+
+        <pre><code>$ flag front Init
+* FLAG - SPA Fontend Applicaiton Console
+
+* Flag Front Project Init
+Please answer various questions as you create your project.
+          
+- Enter project name to create :</code></pre>
+    
+        <p>About the following questions</p>
+
+        <pre><code>- Enter project name to create :</code></pre>
+
+        <p>Specify the project name to be created in the current directory. This input is required.</p>
+
+        <pre><code>- If there is a framework to create, please select from the following.
+(Multiple selections can be made separated by.)
+    
+cordova  : Android app creation using "cordova".
+electron : Windows/Mac desktop application creation using "Electron"
+    
+Select from above, () :</code></pre>
+
+        <p>If there is a corresponding framework, enter the framework name from above.<br>
+        * As of 2023.06.01, only cordova is supported. Scheduled to be supported sequentially.</p>
+
+        <pre><code>Do you use TypeScript?(y):</code></pre>
+
+        <p>If you want to support TypeScript, press the Enter key without entering anything or enter "y".<br>
+        As a prerequisite, TypeScript must be installed in the development environment in advance.</p>
+
+        <p>If you enable this, please write the script source in ts file format (TypeScript)<br>
+        (A sample code is output in .ts format when the project is created.)<br>
+        TypeScript will then transcompile at build time and merge using the js files output by the transcompilation.</p>
+
+        <p>For TypeScript, see <a href="../typescript/">here. </a></p>
+
+        <pre><code>Compress Javascript Source on build? (y):</code></pre>
+        
+        <p>A confirmation whether to compress the merged js files for the build.<br>
+        If you press the Enter key without entering anything or enter "y", the js file of the build data will be compressed.</p>
+
+        <p>As a point of caution, comment-outs are automatically deleted when compressing.</p>
+
+        <pre><code>Obfuscate Javascript Source at build? (y) :</code></pre>
+
+        <p>It is confirmation whether to obfuscate the js file of build data.<br>
+        If you just press Enter or enter "y", the build data js file will be obfuscated.</p>
+
+        <p>It is mainly intended to be used as a countermeasure against reverse engineering at the time of release.<br>
+        ※ This function is not supported as of 2023.06.01.</p>
+
+        <pre><code>Project Name        : ********
+Frameworks          :
+TypeScript          : true
+JS Source Compress  : true
+JS Source Obfuscate : true
+    
+- Create a project with the above contents. Is it OK? (y) :</code></pre>
+
+        <p>Display the confirmation of the input contents, <br>
+        and press the Enter key without inputting or enter "y" to start creating the project.</p>
+
+        <pre><code>* SPA Create-Project
+          
+#  Mkdir                 ****************************/*******
+#  Mkdir                 ****************************/*******/src
+#  SourceCopy            ./*******/init.d.ts
+#  SourceCopy            ./*******/tsconfig.json
+......
+
+Build Start!!
+
+#  TypeScript Complie....  OK
+#  set construct         PATH_APP
+#  set construct         PATH_CONFIG
+.......
+...... Project Create Complete!
+</code></pre>
+
+        <p>When the above console output is displayed and Create Complete! is displayed, project creation is complete.<br>
+        A build is also executed at the same time when the project is created.</p>
+        
+        <hr>
+
+        <a id="structure"></a>
+        <h2>- Project Directory Structure</h2>
+
+        <p>The directory and file structure in the project created by the sample are as follows.<br>
+        (This tutorial shows examples with TypeScript enabled.)</p>
+
+        <pre><code>/frameworks
+    /web
+        index.html
+        index.min.js
+    /src
+        /app
+            /config
+                app.ts
+            /Controller
+                Controller.ts
+                MainController.ts
+                PageController.ts
+                FormController.ts
+                VdomController.ts
+            /Form
+                TestForm.ts
+        /common
+            style.css
+        /rendering
+            /Template
+                default.html
+            /View
+                /main
+                    index.html
+                /page
+                    index.html
+                /form
+                    index.html
+                /vdom
+                    index.html
+            /ViewPart
+                vdom_item.html
+        index.html
+        init.d.ts
+        tsconfig.json
+    package.json</code></pre>
+
+        <p>I will explain a little about the structure of the project directory.</p>
+
+        <p>First, the directory with the project name is divided into two main directories: <code>frameworks</code> and <code>src</code>.</p>
+
+        <p>Build data for each framework is output to <code>frameworks</code>. <br>
+        Deploy or compile the terminal application based on the build data output here.</p>
+
+        <p><code>src</code> is where the source code for this project is stored. <br>
+        After changing or adding the code in this, it will be the flow of build execution.</p>
+
+        <p>The source directory is further divided into <code>app</code> and <code>rendering</code>.</p>
+
+        <p><code>app</code> is a directory for setting script code sources such as ts files (or js files). <br>
+        On the other hand, <code>rendering</code> is a directory for placing HTML files. (so to speak, for screen display)</p>
+
+        <p>In addition, <code>common</code> places static content data that is not directly related to the configuration of the SPA, such as images, css files and external js files.<br>
+        Files placed in this area will be copied directly under when building.</p>
+    
+        <p>See <a href="../structure/">here</a> for details about the directory structure in the project.</p>
+
+        <hr>
+
+        <a id="routing"></a>
+        <h2>- Page Routing</h2>
+
+        <p>Use routing to place each page.<br>
+        Routes are coded in the <code>app/config/app.ts</code> file in the following format.<br>
+        (Note that the <code>app/config/app.ts</code> file is not a ts file dedicated to routing, but a file for specifying initial settings.)</p>
+
+        <pre><code>export default new class App{
+
+    name : string = "TEST APP";
+        
+    routes = {
+        "/": "controller:main|action:index",
+        "/page": "controller:page|action:index",
+        "/form": "controller:form|action:index",
+        "/vdom": "controller:vdom|action:index",
+    };
+};</code></pre>
+
+        <p>The variable <code>routes</code> is for routing.<br>
+        Flag uses the information after the hashtag behind the page URL as the in-page URL.<br>
+        Using the URL in the page as a key, specify the controller and its method (public method) to be assigned to that key as follows.</p>
+
+        <pre><code>"/sample": "controller:sample|action:index",</code></pre>
+
+        <p>For the Top page, specify the key with "/" only.</p>
+
+        <pre><code>"/": "controller:main|action:index",</code></pre>
+
+        <p>By the way, when specifying an argument in the URL, write it like <code>{id}</code>.<br>
+        (The part corresponding to id here is the argument name.)</p>
+
+        <pre><code>"/page/{number}": "controller:page|action:detail",</code></pre>
+
+        <p>If the argument is optional, use <code>{?id}</code>.<br>
+        This also allows you to omit the arguments.</p>
+        
+        <pre><code>"/page/{?number}": "controller:page|action:detail",</code></pre>
+
+        <p>Expand the scope of the URL by nesting it as shown below.</p>
+
+        <pre><code>"/page": {
+    "/":  "controller:page|action:index",
+    "/edit": "controller:page|action:edit",
+    "/detail/{number}": "controller:page|action:detail",
+},</code></pre>
+
+        <p>For more information on routing, see <a href="../routing/">here. </a></p>
+
+        <hr>
+
+        <a id="controller"></a>
+        <h2>- Controller Extend Class</h2>
+
+        <p>The routed Controller is in the <code>app/Controller</code> directory, like "MainController"<br>
+        Specify a file name and class. (It must be capitalized and always end with "Controller")</p>
+
+        <p>Here the class must inherit the Controller of the core library, or <br>
+        Or be sure to inherit another Controller that inherits the core library Controller.<br>
+        The core library here is the class object that Flag provides by default at build time.<br>
+        See <a href="../core/">here for the types of core libraries. </a></p>
+
+        <p>Taking MainController for example, <br>
+        First, you need to prepare a separate <code>app/Controller/Controller.ts</code> file, which is the inheritance source of MainController.</p>
+
+        <p>The code in the sample is written as follows.</p>
+            
+        <pre><code>import _Controller from "Controller";
+import v from "VDom";
+            
+export default class Controller extends _Controller{
+            
+    title : string = "App Title";
+            
+    handleBefore(): void{
+        super.handleBefore();
+        this.template = "default";
+    }
+            
+    handleRenderBefore(): void {
+        super.handleRenderBefore();
+        v("htitle").text(this.title);
+    }
+};</code></pre>
+
+    <p>Step-by-step code explanation</p>
+
+    <pre><code>import _Controller from "Controller";</code></pre>
+
+    <p>Import the core library's Controller class using <code>import</code>.</p>
+
+    <p>Specify the path of the class object to use and its variable name.<br>
+    In this case, the variable name will be the inherited class name.</p>
+
+    <p>If you specify the class name directly for the path, the class object of the core library will be imported.<br>
+        For application-specific class objects (scripts), add a preface starting with <code>app/</code> to the beginning of the path.</p>
+
+    <pre><code>import v from "VDom";</code></pre>
+
+    <p>It also imports the VDom class from the core library.</p>
+
+    <p>Make an import definition for each core library you use.<br>
+    See <a href="../core/">here for the types of core libraries. </a></p>
+    
+    <pre><code>export default class Controller extends _Controller{
+    title : string = "App Title";
+            
+    handleBefore(): void{
+        super.handleBefore();                
+        this.template = "default";
+    }
+                
+    handleRenderBefore(): void {
+        super.handleRenderBefore();
+        v("htitle").text(this.title);
+    }
+};</code></pre>
+
+    <p>The return value in the <code>app/Controller/Controller.ts</code> file is defined as a Controller class.<br>
+    The variable title is used for the title notation of the header.</p>
+
+    <p>The functions <code>handleBefore</code> and <code>handleRenderBefore</code> are reserved words and event handlers that are executed when the page is rendered.<br>
+    The difference between these two methods is that they are executed before and after the page is rendered.</p>
+
+    <p><code>handleBefore</code> is executed before rendering the page.<br>
+    Whereas <code>handleRenderBefore</code> is executed after page rendering is complete.</p>
+
+    <p>Explains about the live cycle at page transitions <a href="../lifecycle/">here. </a></p>
+
+    <p>The variable <code>template</code> is for setting the template name to use.<br>
+    This allows the template to be displayed on all pages.</p>
+  
+    <p>Details about other Controller class specifications are <a href="../controller/">here. </a></p>
+
+    <p>The MainController has the following code in the <code>app/Controller/MainController.ts</code> file.</p>
+
+<pre><code>import Controller from "app/Controller/Controller";
+
+export default class MainController extends Controller{
+                
+    index(){}
+                
+}</code></pre>
+         
+    <p>The previous <code>app/Controller/Controller.ts</code> file is read with the import statement.<br>
+        Then designate it as the inheritance source.</p>
+
+    <p>The function <code>index</code> points to the routing action.<br>
+    Add functions to Controller for each routing action.</p>
+
+    <hr>
+
+    <a id="rendering"></a>
+    <h2>- Rendering Contents (HTML)</h2>
+
+    <p>Place HTML tag descriptions in html format after the <code>rendering</code> directory in the project.<br>
+    Taking the top page (MainController) as an example, the required HTML is the following two types.</p>
+
+    <ul>
+        <li>View</li>
+        <li>Template</li>
+    </ul>
+
+    <p>First of all, regarding the template, a sample template HTML is installed in <code>rendering/Template/default.html</code>.</p>
+
+<pre><code>&lt;header>
+    &lt;div ref="htitle">&lt;/div>
+&lt;/header>
+&lt;div spa-contents>&lt;/div></code></pre>
+
+    <p>The value of the variable title specified in <code>app/Controller/Controller.ts</code> is displayed in the div tag whose ref attribute is htitle.</p>
+
+    <p>The per-page content (HTML) is bound where the spa-contents attribute is specified.</p>
+
+    <p>Here, the content (HTML) for each page is called View.<br>
+    In the case of the top page of the sample, the HTML is placed in <code>rendeirng/View/main/index.html</code>.</p>
+
+    <pre><code>&lt;div class="main">
+&lt;h1>Hallo World!!&lt;/h1>
+&lt;p>FLAG Sample Page.&lt;/p>
+&lt;p>&lt;a class="block" href="#/page">Sample Page&lt;/a>&lt/p>
+&lt;p>&lt;a class="block" href="#/form">Form Sample&lt;/a>&lt;/p>
+&lt;p>&lt;a class="block" href="#/vdom">VDom Sample&lt;/a>&lt;/p>
+&lt;/div></code></pre>
+
+    <hr>
+    <a id="other"></a>
+    <h2>- Other sample sources</h2>
+
+    <p>Sample sources are provided with sample sources that have been prepared in advance.<br>
+    The screen below is provided as a sample source.</p>
+
+    <ul>
+        <li>Page Sample</li>
+        <li>Form Sample</li>
+        <li>VDom Sample</li>
+    </ul>
+
+</div>
+
+
+</body>
+</html>
