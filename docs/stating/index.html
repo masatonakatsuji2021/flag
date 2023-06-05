@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../style.css">
+<title>Flag - Web Frontend Framework</title>
+</head>
+<body>
+
+<header>
+    <h1><a href="../">FLAG</a></h1>
+    <a href="https://github.com/masatonakatsuji2021/flag">GitHub</a>
+    <a href="../install/">installation</a>
+</header>
+
+<div class="contents">
+
+    <div class="ttl">
+        <h1>StartUp</h1>
+    </div>
+
+    <div class="linklist">
+        <p><a href="#flow">Operation flow</a></p>
+        <p><a href="#create">Create a Project</a></p>
+        <p><a href="#build">Build the Project</a></p>
+    </div>
+
+    <a id="flow"></a>
+    <h2>- Operation flow</h2>
+   
+    <p>Flag will carry out front-end application development with the following flow.</p>
+
+    <ul>
+        <li>1. Create a Project</li>
+        <li>2. Writing and modifying code</li>
+        <li>3. Run a build of the project</li>
+        <li>4. Browsing confirmation of build data</li>
+        <li>5. (For Android and desktop apps) Build or debug a terminal application</li>
+    </ul>
+
+    <p><br>
+    Up to the deployment to the web server, <br>
+    the flow is from 1 to 4, and in the case of Android/Window application development, 5 is included.</p>
+
+    <hr>
+    
+    <a id="create"></a>
+    <h2>- Create a Project</h2>
+
+    <p>A project in Flag refers to a unit of application development.<br>
+    Vendors must always start by creating individual projects first.</p>
+
+    <p>Projects are basically created by command execution.<br>
+    Of course, it is theoretically possible to create from scratch without command execution, <br>
+    but you will have to prepare the necessary files manually.<br>
+    It is quite troublesome and time consuming, so it is recommended to create a project by command because it is the easiest.</p>
+
+    <p>To create a project, execute the following command on any directory after installing Flag.</p>
+
+    <pre><code>flag front init</code></pre>
+
+    <p>Starting the command is simple, and after execution, various input prompts are displayed interactively as shown below.<br>
+    The input prompt asks about the name of the project, whether it supports TypeScript description, and the framework to use (Cordova, etc.)<br>
+    See <a href="../tutorial/#create">here</a> for more information on prompts and more.</p>
+
+    <pre><code>* FLAG - SPA Fontend Applicaiton Console
+
+* Flag Front Project Init
+Please answer various questions as you create your project.
+        
+
+- Enter project name to create :</code></pre>
+
+    <p>After filling in all the input requests, a new project will be created.<br>
+    The project contains pages and functions prepared as test samples in advance, so you can refer to them.</p>
+
+    <p>Refer to <a href="../structure/">here</a> for the directory and file structure of the created project. </p>
+
+    <hr>
+
+    <a id="build"></a>
+    <h2>- Build the Project</h2>
+
+    <p>The source in the project consists of multiple HTML files and js files (or ts files if using TypeScript).<br>
+    A build process is required to make it viewable on a web browser.</p>
+
+    <p>The build merges the script files into a single js file.<br>
+    Convert multiple HTML files (views or templates) into script code at the same time.<br>
+    This allows for SPA (Single-Page-Action) that doesn't require an actual page transition.</p>
+
+    <p>Build data is output to the <code>frameworks/web</code> directory within the project.<br>
+    This directory will be the default build output destination.This directory will be the default build output destination.<br>
+    Apart from this, if you add various frameworks, the build data will be duplicated in each directory.</p>
+
+    <p>To build, just run the following command in the project directory.</p>
+
+    <pre><code>flag front Build</code></pre>
+
+    <p>After that, the merging and creation of each file is done automatically.</p>
+
+    <p>If you enable TypeScript, the ts file will be built at the same time.<br>
+    What is actually merged is the js file transcompiled from the ts file.<br>
+    For TypeScript, see <a href="../typescript/">here. </a></p>
+
+    <hr>
+
+    <h2>- Support for other frameworks (Cordova, Electron)</h2>
+
+    <p>The default build of Flag only supports browser viewing.<br>
+    Apart from this, it is possible to link with application development frameworks such as Cordova and Electron.</p>
+
+    <p>For the supported frameworks (Cordova, Electron), a project area for the framework is created in the frameworks directory at the same time as the build data. <br>
+    When executing a build, a set of HTML source files in the added framework is also duplicated at the same time, so<br>
+    This makes it possible to smoothly develop applications for each framework.</p>
+
+    <p>* This function is scheduled to be supported as of 2023.06.01.<br>
+    It will be supported sequentially</p>
+
+    <a href="../">Return to TOP page</a>
+</div>
+
+</body>
+</html>

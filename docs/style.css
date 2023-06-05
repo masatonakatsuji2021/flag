@@ -1,6 +1,13 @@
 body{
     background:#383838;
     color:#c6c6c6;
+    line-height:1.6rem;
+    font-size:13px;
+    font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+}
+h1,h2,h3,h4,h5{
+    font-weight:normal;
+    letter-spacing:2px;
 }
 header{
     background:#272727;
@@ -27,13 +34,14 @@ header a{
     text-decoration:none;
 }
 header + .contents{
+    margin: 0 auto;
     margin-top:50px;
+    max-width:1200px;
+    padding:20px 0;
 }
 
 .main{
     text-align:center;
-    margin: 0 auto;
-    max-width:1200px;
     padding:20px 0;
 }
 .main h1{
@@ -48,12 +56,52 @@ header + .contents{
 }
 .contents pre{
     background:#262626;
-    padding:10px 20px;
+    padding:20px;
     margin:0;
+}
+.contents code{
+    background:#161616;
+    padding:5px;
+    margin:0 10px;
+    color:#fa9;
+}
+.contents pre code{
+    background:none;
+    margin:0;
+    color:#ddd;
+    padding:0;
 }
 .contents .links a{
     margin-right:10px;
 }
+.contents .ttl{
+    margin:40px 0;
+    border-bottom:solid 1px #aaa;
+    text-align:center;
+}
+.contents p{
+    margin-bottom:20px;
+}
+.contents hr{
+    margin:40px 0;
+    border:none;
+    border-bottom:solid 1px #aaa;
+}
 a{
     color:#5cf;
+}
+pre,
+code{
+    font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+    line-height:1.3rem;
+}
+.contents .linklist{
+    border:solid 1px #aaa;
+    margin-bottom:30px;
+    display:inline-block;
+    padding:20px;
+    background:#272727;
+}
+.contents .linklist p{
+    margin:0;
 }
