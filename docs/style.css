@@ -105,3 +105,6 @@ code{
 .contents .linklist p{
     margin:0;
 }
+.contents .linklist .sub{
+    margin-left:20px;
+}

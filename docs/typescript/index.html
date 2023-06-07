@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../style.css">
+<title>Flag - Web Frontend Framework</title>
+</head>
+<body>
+
+    <header>
+        <h1><a href="../">FLAG</a></h1>
+        <a href="https://github.com/masatonakatsuji2021/flag">GitHub</a>
+        <a href="../install/">installation</a>
+    </header>
+
+    <div class="contents">
+
+        <div class="ttl">
+            <h1>TypeScript Suppert</h1>
+        </div>
+
+        <p>This framework supports TypeScript as standard.<br>
+        (Note that TypeScript is not included in the dependencies by default, so you need to install it manually.)</p>
+
+        <p>Here are some notes on using TypeScript.</p>
+
+        <div class="linklist">
+            <p><a href="#reazon">Reasons to use TypeScript</a></p>
+            <p><a href="#apply">How to apply TypeScript</a></p>
+            <p><a href="#tsconfig">tsconfig.json and init.d.ts</a></p>
+            <p><a href="#diff">Differences between writing code in TypeScript and JavaScript</a></p>
+            <div class="sub">
+                <p><a href="#export_return">export and return</a></p>
+                <p><a href="#import">Import description</a></p>
+            </div>
+        </div>
+
+        <a id="reazon"></a>
+        <hr>
+        <h2>- Reasons to use TypeScript</h2>
+
+        <p>TypeScript is a language that can complement static type definitions that could not be defined in JavaScript.<br>
+        Using TypeScript can make your code more rigid.</p>
+
+        <p>By supporting this TypeScript, Flag can use editor extensions such as VSCode<br>
+        You can use the type completion feature to make your code writing more constructive.</p>
+
+        <a id="apply"></a>
+        <hr>
+        <h2>- How to apply TypeScript</h2>
+
+        <p>Applying TypeScript is easy.<br>
+        First of all, it is assumed that TypeScript is installed in the development environment in advance.</p>
+
+        <p>Install TypeScript from npm with the following command.<br>
+        (Always run the global install command.)</p>
+
+        <pre><code>npm i -g typescript</code></pre>
+
+        <p>After that, use the <code>flag front init</code> command to enable TypeScript when creating the project.</p>
+
+        <p>If you disabled TypeScript when creating the project, <br>
+        This can be fixed by changing the Typescript feature in the <code>project.json</code> file to true.<br>
+        (But it's still a js file, so you have to manually change it to a ts file.)</p>
+
+        <pre><code>"typescript": true,</code></pre>
+
+        <a id="tsconfig"></a>
+        <hr>
+        <h2>- tsconfig.jsonとinit.d.ts</h2>
+
+        <p>If you enabled TypeScript, the <code>tsconfig.json</code> and <code>init.d.ts</code> files are automatically generated in your project directory. <br>
+            If you want to change the settings of the transcompiler, please change the settings in the <code>tsconfig.json</code> file.</p>
+
+        <p><code>tsconfig.json</code> immediately after creating a new project has the following settings.</p>
+
+        <pre><code>{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "lib": [
+        "es6",
+            "dom"
+        ],
+        "outDir": ".dist",
+        "paths": {
+            "*": [
+                "****************\node_modules\\@flagfw\\front/bin/*"
+            ],
+            "app/*": [
+                "./app/*"
+            ]
+        }
+    }
+}</code></pre>
+
+        <p>Do not change the <code>*</code> and <code>app/*</code> settings in <code>paths</code>.<br>
+        Here, the path of the @flagfw/front module is specified in advance.</p>
+        
+        <p>If you change it, a compilation error may occur and you may not be able to build.</p>
+
+        <a id="diff"></a>
+        <hr>
+        <h2>- Differences between writing code in TypeScript and JavaScript</h2>
+
+        <p>TypeScript and JavaScript have the same basic syntax, but there are some differences.<br>
+        I will omit the presence or absence of type declarations and the standard features of TypeScript such as overload descriptions.</p>
+        
+        <a id="export_return"></a>
+        <hr style="border-bottom:none">
+        <h3>: export and return</h3>
+
+        <p>If you modularize, specify the return value in the export description for TypeScript.</p>
+        
+        <pre><code>export default class MyModel{
+        
+    run(){
+        console.log("MyModel Class run...");
+    }
+        
+}</code></pre>
+
+        <p>On the other hand, JavaScript returns a return value with return.</p>
+        
+        <pre><code>return class MyModel{
+        
+    run(){
+        console.log("MyModel Class run...");
+    }
+        
+}</code></pre>
+
+        <a id="import"></a>
+        <hr style="border-bottom:none">
+        <h3>: Import description</h3>
+
+        <p>In the case of TypeScript, it is possible to import by using the import statement as it is.<br>
+            If you specify the class to be used directly, it will be loaded from the core library, and if you specify it from "app/~", it will be loaded from the module in the project.</p>
+        
+        <pre><code>import Controller from "Controler";
+import MyModel from "app/Model/MyModel";
+
+export default class MainController extends Controller{
+        
+    index(){        
+        let mm = new MyModel();
+        mm.run();
+    }
+        
+}</code></pre>
+        
+        <p>On the other hand, in the case of javascript, it cannot be used<br>
+        Substitute the use method instead.<br>
+        Path description determination is the same as in TypeScript.<br>
+        (The use method can also be used in TypeScript.)</p>
+        
+        <pre><code>const Controller = use("Controler");
+const MyModel = use("app/Model/MyModel");
+
+return class MainController extends Controller{
+        
+    index(){
+
+        let mm = new MyModel();
+        mm.run();
+    }
+
+}</code></pre>
+        
+
+
+
+
+    </div>
+</body>
+</html>
