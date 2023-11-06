@@ -1,17 +1,17 @@
 const cli = require("@flagfw/cli");
 
-cli.outn("* FLAG");
-
 var args = process.argv;
 
 var mainCommand = args[0];
 
 if(mainCommand == "front"){
+    cli.outn("* FLAG FRONT");
     args.shift();
     process.argv = args;
     require("@flagfw/front/cli.js");
 }
 else if(mainCommand == "server"){
+    cli.outn("* FLAG SERVER");
     args.shift();
     process.argv = args;
     require("@flagfw/server/cli.js");
