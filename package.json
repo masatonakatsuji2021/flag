@@ -17,7 +17,7 @@
         "@flagfw/server":"^1.0.0"
     },
     "scripts": {
-        "postinstall": "node ./bin/install.js",
-        "postuninstall": "node ./bin/uninstall.js"
+        "postinstall": "node ./installation/install.js",
+        "postuninstall": "node ./installation/uninstall.js"
     }
 }

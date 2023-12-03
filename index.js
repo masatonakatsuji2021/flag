@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const cli_1 = require("@flagfw/cli");
 const cli_2 = require("@flagfw/front/cli");
+const cli_3 = require("@flagfw/server/cli");
 var args = process.argv;
 var mainCommand = args[0];
 if (mainCommand == "front") {
@@ -12,7 +13,7 @@ if (mainCommand == "front") {
 else if (mainCommand == "server") {
     args.shift();
     process.argv = args;
-    require("@flagfw/server/cli.js");
+    (0, cli_3.default)();
 }
 else {
     if (mainCommand) {
