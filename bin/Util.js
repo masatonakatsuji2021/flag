@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const child_process_1 = require("child_process");
+const http = require("http");
+const https = require("https");
 class FlagUtil {
     /**
      * ***uniwId*** ;
@@ -151,6 +153,41 @@ class FlagUtil {
             childProcess.stdout.on("end", () => {
                 resolve(true);
             });
+        });
+    }
+    static request(url, option) {
+        let lst;
+        if (url.indexOf("https://") === 0) {
+            lst = https;
+        }
+        else {
+            lst = http;
+        }
+        return new Promise((resolve) => {
+            const listener = lst.get(url, (res) => {
+                let data = "";
+                res.on("data", (c) => {
+                    data += c;
+                });
+                res.on("end", () => {
+                    let result = {
+                        status: true,
+                        data: data,
+                        res: res,
+                    };
+                    resolve(result);
+                });
+                res.on("error", (error) => {
+                    let result = {
+                        status: false,
+                        error: error,
+                        data: data,
+                        res: res,
+                    };
+                    resolve(result);
+                });
+            });
+            listener.end();
         });
     }
 }

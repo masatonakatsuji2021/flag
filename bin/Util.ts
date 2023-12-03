@@ -1,11 +1,19 @@
 import * as fs from "fs";
 import { spawn } from "child_process";
-import { FlagCLI } from "@flagfw/cli";
+import * as http from "http";
+import * as https from "https";
 
 interface deepSearchOption{
     callback? : Function,
     copyCallback? : Function,
     ignore? : Array<string>,
+}
+
+interface RequestResult{
+    status : boolean,
+    data : string | Object,
+    res : http.IncomingMessage,
+    error? : Error,
 }
 
 export default class FlagUtil{
@@ -182,4 +190,46 @@ export default class FlagUtil{
         });
     }
 
+    public static request(url: string, option?){
+        let lst;
+        if(url.indexOf("https://") === 0){
+            lst = https;
+        }
+        else{
+            lst = http;
+        }
+
+        return new Promise((resolve) => {
+
+            const listener = lst.get(url, (res) => {
+
+                let data = "";
+    
+                res.on("data", (c) => {
+                    data += c;
+                });
+    
+                res.on("end", () => {
+                    let result : RequestResult = {
+                        status: true,
+                        data : data,
+                        res: res,
+                    };
+                    resolve(result);
+                });
+
+                res.on("error", (error) => {
+                    let result : RequestResult = {
+                        status: false,
+                        error: error,
+                        data : data,
+                        res: res,
+                    };
+                    resolve(result);
+                });
+            });
+            listener.end();    
+        });
+
+    }
 }
