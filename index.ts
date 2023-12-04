@@ -1,6 +1,6 @@
 import { FlagCLI } from "@flagfw/cli";
-import front from "@flagfw/front/cli";
-import server from "@flagfw/server/cli";
+import front from "@flagfw/front";
+import server from "@flagfw/server";
 
 var args = process.argv;
 

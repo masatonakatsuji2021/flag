@@ -1,7 +1,7 @@
 import * as readline from "readline";
 import CLIColorType from "./CLIColorType";
 
-let args = process.argv;
+let args = process.argv.concat();
 let _indent : number = 0;
 
 args.shift();

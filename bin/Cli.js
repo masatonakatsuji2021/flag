@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const readline = require("readline");
 const CLIColorType_1 = require("./CLIColorType");
-let args = process.argv;
+let args = process.argv.concat();
 let _indent = 0;
 args.shift();
 args.shift();
