@@ -10,10 +10,7 @@
     },
     "dependencies": {
         "@types/node": "^20.10.2",
-        "@flagfw/cli":"^1.0.0",
-        "@flagfw/build":"^1.0.0",
         "@flagfw/front":"^1.0.0",
-        "@flagfw/validate":"^1.0.0",
         "@flagfw/server":"^1.0.0"
     },
     "scripts": {

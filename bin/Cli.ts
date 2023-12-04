@@ -37,7 +37,7 @@ export default class FlagCLI{
         return indentStr;
     }
 
-    public static getArgs() : Object{
+    public static getArgs() : Array<string>{
         return args;
     }
 
