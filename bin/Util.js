@@ -4,6 +4,7 @@ const fs = require("fs");
 const child_process_1 = require("child_process");
 const http = require("http");
 const https = require("https");
+const buffer_1 = require("buffer");
 class FlagUtil {
     /**
      * ***uniwId*** ;
@@ -41,6 +42,12 @@ class FlagUtil {
      */
     static lcFirst(content) {
         return content.substring(0, 1).toLowerCase() + content.substring(1);
+    }
+    static base64Encode(text) {
+        return buffer_1.Buffer.from(text).toString('base64');
+    }
+    static base64Decode(encodeText) {
+        return buffer_1.Buffer.from(encodeText, 'base64').toString();
     }
     static deepSearch(filePath, option) {
         if (!option) {

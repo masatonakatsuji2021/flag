@@ -2,6 +2,7 @@ import * as fs from "fs";
 import { spawn } from "child_process";
 import * as http from "http";
 import * as https from "https";
+import { Buffer } from 'buffer';
 
 interface deepSearchOption{
     callback? : Function,
@@ -56,6 +57,14 @@ export default class FlagUtil{
      */
     public static lcFirst(content : string) : string{
         return content.substring(0,1).toLowerCase() + content.substring(1);
+    }
+
+    public static base64Encode(text) : string{
+        return Buffer.from(text).toString('base64');
+    }
+
+    public static base64Decode(encodeText : string) : string{
+        return Buffer.from(encodeText, 'base64').toString();
     }
 
     public static deepSearch(filePath : string, option? : deepSearchOption){
