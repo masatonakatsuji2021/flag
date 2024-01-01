@@ -1,15 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Cli_1 = require("@flagfw/flag/bin/Cli");
-const front_1 = require("@flagfw/front");
-const server_1 = require("@flagfw/server");
 let args = Cli_1.default.getArgs();
 var mainCommand = args[0];
 if (mainCommand == "front") {
-    (0, front_1.default)();
+    try {
+        const front = require("@flagfw/front");
+        front.default();
+    }
+    catch (err) {
+        Cli_1.default.red("[ERROR] ").outn("Npm Module \"@flagfw/front\" is not installed or there is a problem with the module");
+    }
 }
 else if (mainCommand == "server") {
-    (0, server_1.default)();
+    try {
+        const server = require("@flagfw/server");
+        server.default();
+    }
+    catch (err) {
+        Cli_1.default.red("[ERROR] ").outn("Npm Module \"@flagfw/server\" is not installed or there is a problem with the module");
+    }
 }
 else {
     if (mainCommand) {

@@ -1,16 +1,23 @@
 import FlagCLI from "@flagfw/flag/bin/Cli";
-import front from "@flagfw/front";
-import server from "@flagfw/server";
-
 let args = FlagCLI.getArgs();
 
 var mainCommand = args[0];
 
 if(mainCommand == "front"){
-    front();
+    try{
+        const front = require("@flagfw/front");
+        front.default();
+    }catch(err){
+        FlagCLI.red("[ERROR] ").outn("Npm Module \"@flagfw/front\" is not installed or there is a problem with the module");
+    }
 }
 else if(mainCommand == "server"){
-    server();
+    try{
+        const server = require("@flagfw/server");
+        server.default();
+    }catch(err){
+        FlagCLI.red("[ERROR] ").outn("Npm Module \"@flagfw/server\" is not installed or there is a problem with the module");
+    }
 }
 else{
     if(mainCommand){
