@@ -5,7 +5,11 @@ const path = require("path");
 const os = require("os");
 const child_process_1 = require("child_process");
 const gp_ = (0, child_process_1.execSync)("npm root -g").toString().split("\n").join("");
-const globalPath = path.dirname(gp_);
+let globalPath = path.dirname(gp_);
+if (globalPath.indexOf(".nvm") > 0) {
+    // use nvm case...
+    globalPath = path.dirname(globalPath) + "/bin";
+}
 if (__dirname.indexOf(globalPath) === 0) {
     console.log("# global install setting");
     console.log("#");

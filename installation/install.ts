@@ -4,7 +4,11 @@ import * as os from "os";
 import { execSync } from "child_process";
 
 const gp_ : string = execSync("npm root -g").toString().split("\n").join("");
-const globalPath : string = path.dirname(gp_);
+let globalPath = path.dirname(gp_);
+if(globalPath.indexOf(".nvm") > 0){
+    // use nvm case...
+    globalPath = path.dirname(globalPath) + "/bin";
+}
 
 if(__dirname.indexOf(globalPath) === 0){
     console.log("# global install setting");
